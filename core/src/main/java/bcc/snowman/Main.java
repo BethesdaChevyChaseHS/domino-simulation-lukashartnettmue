@@ -171,8 +171,16 @@ public class Main extends ApplicationAdapter {
     }
 
     private void addAllDominos() {
-        //add your code here!!
+        float startX = 1.5f; 
+        float startY = 0.5f;
+        float dominoSpacing = 0.5f; 
+    
+        for (int i = 0; i < 10; i++) {
+            addDomino(startX + i * dominoSpacing, startY); 
+        }
     }
+    
+    
 
     // note - creates from center
     private void addDomino(float x, float y) {
@@ -203,24 +211,29 @@ public class Main extends ApplicationAdapter {
     private void dominoStart() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(.5f, .5f);
-        bodyDef.linearVelocity.set(1.5f, 0f);
-
+    
+        bodyDef.position.set(1f, 0.7f);  
+        bodyDef.linearVelocity.set(2f, -1f); 
+    
         Body ball = world.createBody(bodyDef);
-
+    
         CircleShape ballShape = new CircleShape();
         ballShape.setRadius(.2f);
-
+    
         FixtureDef ballFixture = new FixtureDef();
         ballFixture.shape = ballShape;
         ballFixture.density = 1f;
-        ballFixture.restitution = BOUNCINESS; // Make the ball bouncy
-
+        ballFixture.restitution = BOUNCINESS; 
+    
         ball.createFixture(ballFixture);
-
+    
         ballShape.dispose();
         bodies.add(ball);
     }
+    
+    
+    
+    
 
     @Override
     public void dispose() {
